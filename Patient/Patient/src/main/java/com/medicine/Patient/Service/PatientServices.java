@@ -2,7 +2,7 @@ package com.medicine.Patient.Service;
 
 import java.util.List;
 
-import com.medicine.Patient.Patient;
+import com.medicine.Patient.Entities.Patient;
 
 public interface PatientServices {
     

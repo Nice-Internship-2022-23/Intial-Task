@@ -1,4 +1,4 @@
-package com.medicine.Patient;
+package com.medicine.Patient.Entities;
 
 import java.util.ArrayList;
 

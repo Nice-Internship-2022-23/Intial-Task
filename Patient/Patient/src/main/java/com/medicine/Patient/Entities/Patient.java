@@ -1,4 +1,4 @@
-package com.medicine.Patient;
+package com.medicine.Patient.Entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,5 +39,5 @@ public class Patient {
     private String patientDisease;
 
     @Transient
-    private Disease diseaseInfo;
+    private Disease disease;
 }
