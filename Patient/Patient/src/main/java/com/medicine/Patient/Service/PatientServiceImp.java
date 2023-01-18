@@ -45,7 +45,18 @@ public class PatientServiceImp implements PatientServices{
 
     @Override
     public List<Patient> getPatients() {
-        return patientRepo.findAll();
+        List<Patient> patientList = new ArrayList<>();
+        for(Patient patient : patientRepo.findAll()){
+            ArrayList<String> symptomsList = restTemplate.getForObject("http://DISEASE-DATA/disease/getsymptoms/"+patient.getPatientDisease(), ArrayList.class);
+            ArrayList<String> curationList = restTemplate.getForObject("http://DISEASE-DATA/disease/getcure/"+patient.getPatientDisease(), ArrayList.class);
+            Disease disease = new Disease();
+            disease.setDiseaseCuration(curationList);
+            disease.setDiseaseName(patient.getPatientDisease());
+            disease.setDiseaseSymptomps(symptomsList);
+            patient.setDisease(disease);
+            patientList.add(patient);
+        }
+        return patientList;
     }
 
     @Override
