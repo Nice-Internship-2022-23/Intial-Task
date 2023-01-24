@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.medicine.Patient.Entities.Disease;
 import com.medicine.Patient.Entities.Patient;
+import com.medicine.Patient.Repository.PatientRepo;
 
 @Service
 public class PatientServiceImp implements PatientServices{
@@ -30,7 +31,9 @@ public class PatientServiceImp implements PatientServices{
     public Patient getPatient(String pId) {
         if(patientRepo.existsById(pId)){
             Patient patient = patientRepo.findById(pId).get();
+            @SuppressWarnings("unchecked")
             ArrayList<String> symptomsList = restTemplate.getForObject("http://DISEASE-DATA/disease/getsymptoms/"+patient.getPatientDisease(), ArrayList.class);
+            @SuppressWarnings("unchecked")
             ArrayList<String> curationList = restTemplate.getForObject("http://DISEASE-DATA/disease/getcure/"+patient.getPatientDisease(), ArrayList.class);
             Disease disease = new Disease();
             disease.setDiseaseCuration(curationList);
@@ -47,7 +50,9 @@ public class PatientServiceImp implements PatientServices{
     public List<Patient> getPatients() {
         List<Patient> patientList = new ArrayList<>();
         for(Patient patient : patientRepo.findAll()){
+            @SuppressWarnings("unchecked")
             ArrayList<String> symptomsList = restTemplate.getForObject("http://DISEASE-DATA/disease/getsymptoms/"+patient.getPatientDisease(), ArrayList.class);
+            @SuppressWarnings("unchecked")
             ArrayList<String> curationList = restTemplate.getForObject("http://DISEASE-DATA/disease/getcure/"+patient.getPatientDisease(), ArrayList.class);
             Disease disease = new Disease();
             disease.setDiseaseCuration(curationList);

@@ -1,4 +1,4 @@
-package com.medicine.Patient.Service;
+package com.medicine.Patient.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

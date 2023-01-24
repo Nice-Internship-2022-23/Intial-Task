@@ -2,7 +2,10 @@ package com.medicine.Patient.Controllers;
 
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +19,7 @@ import com.medicine.Patient.Service.PatientServices;
 
 @RestController
 @RequestMapping("/patients")
+@Validated
 public class PatientController {
     
     @Autowired
@@ -32,7 +36,7 @@ public class PatientController {
     }
 
     @GetMapping("/get/{pId}")
-    public Patient getPatient(@PathVariable String pId){
+    public Patient getPatient(@PathVariable @NotBlank(message = "Please provide patient id carefully!!!") String pId){
         return patientService.getPatient(pId);
     }
 
@@ -42,7 +46,7 @@ public class PatientController {
     }
 
     @DeleteMapping("/delete/{pId}")
-    public String deletePatient(@PathVariable String pId){
+    public String deletePatient(@PathVariable @NotBlank(message = "Please provide patient id carefully!!!") String pId){
         return patientService.deletePatient(pId);
     }
 
